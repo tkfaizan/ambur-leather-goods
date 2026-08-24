@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  slug        String    @unique
+  description String?   @db.Text
+  image       String?
+  sortOrder   Int       @default(0)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+}
+
+model Product {
+  id          Int            @id @default(autoincrement())
+  name        String
+  slug        String         @unique
+  sku         String         @unique
+  description String?        @db.Text
+  price       Decimal        @db.Decimal(10, 2)
+  salePrice   Decimal?       @db.Decimal(10, 2)
+  stockStatus String         @default("in_stock")
+  isActive    Boolean        @default(true)
+  isFeatured  Boolean        @default(false)
+  isBestSeller Boolean      @default(false)
+  categoryId  Int
+  category    Category       @relation(fields: [categoryId], references: [id])
+  images      ProductImage[]
+  colors      ProductColor[]
+  sizes       ProductSize[]
+  orderItems  OrderItem[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@index([categoryId])
+  @@index([slug])
+  @@index([sku])
+  @@index([isActive])
+  @@index([isFeatured])
+  @@index([isBestSeller])
+}
+
+model ProductImage {
+  id        Int      @id @default(autoincrement())
+  url       String
+  isMain    Boolean  @default(false)
+  colorName String?  // Optional: link to specific color
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([productId])
+  @@index([colorName])
+}
+
+model ProductColor {
+  id        Int     @id @default(autoincrement())
+  name      String
+  hex       String?
+  productId Int
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, name])
+  @@index([productId])
+}
+
+model ProductSize {
+  id        Int     @id @default(autoincrement())
+  size      String
+  productId Int
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, size])
+  @@index([productId])
+}
+
+model Order {
+  id            Int         @id @default(autoincrement())
+  customerName  String
+  whatsappNumber String
+  address       String      @db.Text
+  city          String
+  state         String
+  pincode       String
+  note          String?     @db.Text
+  status        String      @default("new")
+  totalAmount   Decimal     @db.Decimal(10, 2)
+  items         OrderItem[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id            Int      @id @default(autoincrement())
+  orderId       Int
+  order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId     Int
+  product       Product  @relation(fields: [productId], references: [id])
+  productName   String
+  sku           String
+  color         String
+  size          String
+  quantity      Int
+  unitPrice     Decimal  @db.Decimal(10, 2)
+  totalPrice    Decimal  @db.Decimal(10, 2)
+  imageUrl      String
+  createdAt     DateTime @default(now())
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+model Setting {
+  id            Int      @id @default(autoincrement())
+  businessName  String   @default("AMBUR Leather Goods")
+  whatsappNumber String  @default("919876543210")
+  businessPhone String?
+  email         String?
+  address       String?  @db.Text
+  instagramUrl  String?
+  facebookUrl   String?
+  logo          String?
+  favicon       String?
+  updatedAt     DateTime @updatedAt
+}
