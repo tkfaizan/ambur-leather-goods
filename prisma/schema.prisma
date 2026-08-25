@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Admin {
+model admin {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   password  String
@@ -16,7 +16,7 @@ model Admin {
   updatedAt DateTime @updatedAt
 }
 
-model Category {
+model category {
   id          Int       @id @default(autoincrement())
   name        String    @unique
   slug        String    @unique
@@ -29,7 +29,7 @@ model Category {
   products    Product[]
 }
 
-model Product {
+model product {
   id          Int            @id @default(autoincrement())
   name        String
   slug        String         @unique
@@ -58,7 +58,7 @@ model Product {
   @@index([isBestSeller])
 }
 
-model ProductImage {
+model productImage {
   id        Int      @id @default(autoincrement())
   url       String
   isMain    Boolean  @default(false)
@@ -72,7 +72,7 @@ model ProductImage {
   @@index([colorName])
 }
 
-model ProductColor {
+model productcolor {
   id        Int     @id @default(autoincrement())
   name      String
   hex       String?
@@ -83,7 +83,7 @@ model ProductColor {
   @@index([productId])
 }
 
-model ProductSize {
+model productsize {
   id        Int     @id @default(autoincrement())
   size      String
   productId Int
@@ -93,7 +93,7 @@ model ProductSize {
   @@index([productId])
 }
 
-model Order {
+model order {
   id            Int         @id @default(autoincrement())
   customerName  String
   whatsappNumber String
@@ -112,7 +112,7 @@ model Order {
   @@index([createdAt])
 }
 
-model OrderItem {
+model orderitem {
   id            Int      @id @default(autoincrement())
   orderId       Int
   order         Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
@@ -132,7 +132,7 @@ model OrderItem {
   @@index([productId])
 }
 
-model Setting {
+model setting {
   id            Int      @id @default(autoincrement())
   businessName  String   @default("AMBUR Leather Goods")
   whatsappNumber String  @default("919876543210")
