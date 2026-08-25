@@ -46,7 +46,7 @@ export async function Footer() {
               <li><Link href="/" className="text-gray-400 hover:text-white text-sm">Home</Link></li>
               <li><Link href="/products" className="text-gray-400 hover:text-white text-sm">All Products</Link></li>
               <li><Link href="/cart" className="text-gray-400 hover:text-white text-sm">Cart</Link></li>
-              <li><a href={`https://wa.me/${settings?.whatsappNumber || "919876543210"}`} target="_blank" className="text-gray-400 hover:text-white text-sm">Contact on WhatsApp</a></li>
+              <li><a href={`https://wa.me/${settings?.whatsappNumber || "919629292165"}`} target="_blank" className="text-gray-400 hover:text-white text-sm">Contact on WhatsApp</a></li>
             </ul>
           </div>
           <div>
