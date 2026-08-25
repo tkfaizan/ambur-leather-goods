@@ -2,7 +2,7 @@ import { prisma } from "@/lib/db";
 import { CategoryGrid } from "@/components/CategoryGrid";
 import { SectionHeader } from "@/components/SectionHeader";
 import type { Metadata } from "next";
-
+export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "All Categories | AMBUR Leather Goods",
   description: "Browse all leather product categories - Slippers, Sandals, Loafers, Shoes, Belts, Wallets, Bags, and more.",

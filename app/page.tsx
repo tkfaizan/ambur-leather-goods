@@ -6,7 +6,7 @@ import { ProductGrid } from "@/components/ProductGrid";
 import { SectionHeader } from "@/components/SectionHeader";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { FeaturesBar } from "@/components/FeaturesBar";
-
+export const dynamic = "force-dynamic";
 export const revalidate = 60;
 
 export default async function HomePage() {
