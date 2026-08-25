@@ -80,7 +80,7 @@ model ProductImage {
   @@index([productId])
   @@index([colorName])
 
-  @@map("productImage")
+  @@map("productimage")
 }
 
 model ProductColor {
