@@ -45,7 +45,7 @@ export default async function AdminDashboard() {
               <div key={order.id} className="p-4 flex justify-between items-center hover:bg-gray-50">
                 <div>
                   <p className="font-medium">#{order.id} - {order.customerName}</p>
-                  <p className="text-sm text-gray-500">{order.items.length} items • ₹{order.totalAmount}</p>
+                  <p className="text-sm text-gray-500">{order.items.length} items • ₹{order.totalAmount.toString()}</p>
                 </div>
                 <span className={`px-3 py-1 rounded-full text-xs font-medium ${order.status === "new" ? "bg-blue-100 text-blue-700" : order.status === "confirmed" ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-700"}`}>{order.status}</span>
               </div>
