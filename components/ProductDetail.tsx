@@ -84,7 +84,7 @@ export function ProductDetail({ product, relatedProducts }: { product: ProductWi
               <span className="text-3xl font-bold text-leather-700">{formatPrice(Number(product.price))}</span>
             )}
           </div>
-          <p className="text-gray-600 leading-relaxed mb-6">{product.description}</p>
+          <div className="text-gray-600 leading-relaxed mb-6">dangerouslySetInnerHTML= dangerouslySetInnerHTML=__html:{product.description}</div>
           <div className="flex items-center gap-2 mb-6">
             <span className={`w-3 h-3 rounded-full ${product.stockStatus === "in_stock" ? "bg-green-500" : product.stockStatus === "low_stock" ? "bg-yellow-500" : "bg-red-500"}`} />
             <span className="text-sm font-medium">{product.stockStatus === "in_stock" ? "In Stock" : product.stockStatus === "low_stock" ? "Low Stock" : "Out of Stock"}</span>
