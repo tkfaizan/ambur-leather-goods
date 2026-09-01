@@ -84,7 +84,7 @@ export function ProductDetail({ product, relatedProducts }: { product: ProductWi
               <span className="text-3xl font-bold text-leather-700">{formatPrice(Number(product.price))}</span>
             )}
           </div>
-          <div className="text-gray-600 leading-relaxed mb-6">dangerouslySetInnerHTML= __html:{product.description}</div>
+          <div className="text-gray-600 leading-relaxed mb-6" dangerouslySetInnerHTML={{ __html: product.description || "" }}></div>
           <div className="flex items-center gap-2 mb-6">
             <span className={`w-3 h-3 rounded-full ${product.stockStatus === "in_stock" ? "bg-green-500" : product.stockStatus === "low_stock" ? "bg-yellow-500" : "bg-red-500"}`} />
             <span className="text-sm font-medium">{product.stockStatus === "in_stock" ? "In Stock" : product.stockStatus === "low_stock" ? "Low Stock" : "Out of Stock"}</span>
@@ -108,7 +108,7 @@ export function ProductDetail({ product, relatedProducts }: { product: ProductWi
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-3">Size: <span className="font-bold">{selectedSize}</span></label>
               <div className="flex flex-wrap gap-3">
-                {product.sizes.map((s) => (
+                {product.sizes.sort((a, b) => Number(a.size) - Number(b.size)).map((s) => (
                   <button key={s.id} onClick={() => setSelectedSize(s.size)}
                     className={`w-14 h-12 rounded-lg border-2 font-medium transition-all ${selectedSize === s.size ? "border-leather-700 bg-leather-50 text-leather-700" : "border-gray-200 hover:border-gray-300"}`}>{s.size}</button>
                 ))}
