@@ -127,7 +127,7 @@ export function ProductDetail({ product, relatedProducts }: { product: ProductWi
 
           <div className="flex flex-col sm:flex-row gap-4">
             <button onClick={handleAddToCart} disabled={product.stockStatus === "out_of_stock"} className="btn-primary flex-1 flex items-center justify-center gap-2 text-lg disabled:opacity-50"><ShoppingBag className="w-5 h-5" /> Add to Cart</button>
-            <button onClick={handleWhatsAppDirect} disabled={product.stockStatus === "out_of_stock"} className="btn-whatsapp flex-1 text-lg disabled:opacity-50"><MessageCircle className="w-5 h-5" /> Order on WhatsApp</button>
+            {/* <button onClick={handleWhatsAppDirect} disabled={product.stockStatus === "out_of_stock"} className="btn-whatsapp flex-1 text-lg disabled:opacity-50"><MessageCircle className="w-5 h-5" /> Order on WhatsApp</button> */}
           </div>
           <div className="mt-6 pt-6 border-t"><p className="text-sm text-gray-500">SKU: <span className="font-medium text-gray-900">{product.sku}</span></p></div>
         </div>
